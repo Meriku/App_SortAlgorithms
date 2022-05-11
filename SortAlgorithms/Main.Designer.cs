@@ -58,7 +58,7 @@
             // trackBarArrayLenght
             // 
             this.trackBarArrayLenght.Location = new System.Drawing.Point(233, 498);
-            this.trackBarArrayLenght.Maximum = 20000;
+            this.trackBarArrayLenght.Maximum = 100000;
             this.trackBarArrayLenght.Minimum = 10;
             this.trackBarArrayLenght.Name = "trackBarArrayLenght";
             this.trackBarArrayLenght.Size = new System.Drawing.Size(333, 56);
@@ -88,6 +88,7 @@
             this.MinimumSize = new System.Drawing.Size(820, 600);
             this.Name = "Main";
             this.Text = "Sort Algorithms";
+            this.Load += new System.EventHandler(this.Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBarArrayLenght)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

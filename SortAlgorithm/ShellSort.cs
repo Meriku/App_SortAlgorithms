@@ -30,7 +30,6 @@ namespace SortAlgorithm
         public void Sort()
         {
             timer.Restart();
-
             var step = Items.Length / 2; 
             // Шаг равен половине длины массива (округление в меньшую сторону)
 
@@ -48,11 +47,10 @@ namespace SortAlgorithm
                         j -= step;
                     }
                 }
-
                 step /= 2;
                 // Делим шаг на 2
-
             }
+            IsSorted = true;
             timer.Stop();
         }
     }

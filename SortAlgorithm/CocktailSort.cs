@@ -52,6 +52,7 @@ namespace SortAlgorithm
                 }
                 left++; // Отсортировали крайний левый элемент
             }
+            IsSorted = true;
             timer.Stop();
         }
     }

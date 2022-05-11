@@ -42,6 +42,7 @@ namespace SortAlgorithm
                 }
                 Items[j] = temp;
             }
+            IsSorted = true;
             timer.Stop();
         }
 

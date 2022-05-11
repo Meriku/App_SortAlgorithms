@@ -45,6 +45,7 @@ namespace SortAlgorithm
                     }
                 }
             }
+            IsSorted = true;
             timer.Stop();
         }
 
