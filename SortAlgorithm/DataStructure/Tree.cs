@@ -9,7 +9,7 @@ namespace SortAlgorithm.DataStructure
 {
     public class Tree
     {
-        public Node Root { get; set; }
+        private Node Root { get; set; }
 
         public int Count { get; set; }
 

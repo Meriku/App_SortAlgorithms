@@ -15,23 +15,12 @@ namespace SortAlgorithms
 {
     public partial class Main : Form
     {
-        SortVisualization visualization = new SortVisualization();
-        List<Label> labels = new List<Label>();
-        List<BaseSort> sorts = new List<BaseSort>();
-
         BaseSort array = new BaseSort();
-        BubbleSort bubbleSort;
-        CocktailSort cocktailSort;
-        InsertionSort insertionSort;
-        ShellSort shellSort;
-        TreeSort treeSort;
-        HeapSort heapSort;
-
-
+        Label arrayLabel = new Label();
 
         private int ArrayLenght = 500;
-        private Random rnd = new Random();
 
+        private List<SortAlgorithmAndLabel> sortAlgorithmAndLabels = new List<SortAlgorithmAndLabel>();
 
         public Main()
         {
@@ -40,98 +29,83 @@ namespace SortAlgorithms
 
         private void buttonGenerateArray_Click(object sender, EventArgs e)
         {
-            if (visualization.labels.Count <= 1)
-            // Первый вызов
+   
+            if (SortVisualization.labels.Count() == 0)
             {
                 array.Items = GetArray(ArrayLenght);
-                var label = visualization.DrawLabel($"Случайный массив: {array}");
-                Controls.Add(label);
+                arrayLabel = SortVisualization.DrawLabel($"Случайный массив: {array}");
+                Controls.Add(arrayLabel);
             }
             else
             {
-            // Последующие вызовы
-                foreach (var lab in visualization.labels)
-                {
-                    Controls.Remove(lab);
-                }
-                visualization.labels.Clear();
-
                 array.Items = GetArray(ArrayLenght);
-                var label = visualization.DrawLabel($"Случайный массив: {array}");
-                Controls.Add(label);
+                arrayLabel.Invoke((Action)delegate { arrayLabel.Text = $"Случайный массив: {array}"; });
+
+                foreach (var sortAlgor in sortAlgorithmAndLabels)
+                {
+                    Controls.Remove(sortAlgor.Label);
+                    if (SortVisualization.labels.Contains(sortAlgor.Label))
+                    {
+                        SortVisualization.labels.Remove(sortAlgor.Label);
+                    }        
+                }
+
+                sortAlgorithmAndLabels.Clear();
             }
-       
         }
 
         private void buttonSortArray_Click(object sender, EventArgs e)
         {
-            sorts.Clear();
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel(new BubbleSort(array.Items)));
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel(new CocktailSort(array.Items)));
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel(new SelectionSort(array.Items)));
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel(new TreeSort(array.Items)));
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel(new HeapSort(array.Items)));
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel(new InsertionSort(array.Items)));
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel(new ShellSort(array.Items)));
 
-            bubbleSort = new BubbleSort(array.Items);
-            cocktailSort = new CocktailSort(array.Items);
-            insertionSort = new InsertionSort(array.Items);
-            shellSort = new ShellSort(array.Items);
-            treeSort = new TreeSort(array.Items);
-            heapSort = new HeapSort(array.Items);
+            
 
-            sorts.AddRange( new List<BaseSort>(){ bubbleSort, cocktailSort, insertionSort, shellSort, treeSort, heapSort } );
-
-            var bubbleSortLabel = visualization.DrawLabel("Bubble Sort Time:");
-            var cocktailSortLabel = visualization.DrawLabel("Cocktail Sort Time:");
-            var insertionSortLabel = visualization.DrawLabel("Insertion Sort Time:");
-            var shellSortLabel = visualization.DrawLabel("Shell Sort Time:");
-            var treeSortLabel = visualization.DrawLabel("Tree Sort Time:");
-            var heapSortLabel = visualization.DrawLabel("Heap Sort Time:");
-
-
-            Controls.Add(cocktailSortLabel);
-            Controls.Add(bubbleSortLabel);
-            Controls.Add(insertionSortLabel);
-            Controls.Add(shellSortLabel);
-            Controls.Add(treeSortLabel);
-            Controls.Add(heapSortLabel);
-
-
-
-            Task.Run(() => { 
-                            bubbleSort.Sort();
-                            var place = sorts.Where(x => x.IsSorted).Count(); 
-                            bubbleSortLabel.Invoke((Action)delegate { bubbleSortLabel.Text = $"{place}. Bubble Sort Time: {bubbleSort.Time} Swap count: {bubbleSort.SwapCount}\nBubble Sort: {bubbleSort}"; });
-            });
-
-            Task.Run(() => { 
-                            cocktailSort.Sort();
-                            var place = sorts.Where(x => x.IsSorted).Count();
-                            cocktailSortLabel.Invoke((Action)delegate { cocktailSortLabel.Text = $"{place}. Cocktail Sort Time: {cocktailSort.Time} Swap count: {cocktailSort.SwapCount}\nCocktail Sort: {cocktailSort}"; });
-            });
-
-
-            Task.Run(() => {
-                            insertionSort.Sort();
-                            var place = sorts.Where(x => x.IsSorted).Count();
-                            insertionSortLabel.Invoke((Action)delegate { insertionSortLabel.Text = $"{place}. Insertion Sort Time: {insertionSort.Time} Swap count: {insertionSort.SwapCount}\nInsertion Sort: {insertionSort}"; });
-            });
-
-
-            Task.Run(() => {
-                            shellSort.Sort();
-                            var place = sorts.Where(x => x.IsSorted).Count();
-                            shellSortLabel.Invoke((Action)delegate { shellSortLabel.Text = $"{place}. Shell Sort Time: {shellSort.Time} Swap count: {shellSort.SwapCount}\nShell Sort: {shellSort}"; });
-            });
-
-
-            Task.Run(() =>
+            foreach (var sortAlgor in sortAlgorithmAndLabels)
             {
-                            treeSort.Sort();
-                            var place = sorts.Where(x => x.IsSorted).Count();
-                            treeSortLabel.Invoke((Action)delegate { treeSortLabel.Text = $"{place}. Tree Sort Time: {treeSort.Time} Swap count: {treeSort.SwapCount}\nTree Sort: {treeSort}"; });
-            });
+                Controls.Add(sortAlgor.Label);
+            }
 
-            Task.Run(() => {
-                            heapSort.Sort();
-                            var place = sorts.Where(x => x.IsSorted).Count();
-                            heapSortLabel.Invoke((Action)delegate { heapSortLabel.Text = $"{place}. Heap Sort Time: {heapSort.Time} Swap count: {heapSort.SwapCount}\nHeap Sort: {heapSort}"; });
-            });
+            foreach (var sortAlgor in sortAlgorithmAndLabels)
+            {
+                Task.Run(() =>
+                {
+                    Task.Run(() => 
+                    {
+                        var temptext = sortAlgor.Label.Text;    // Сохраняем название алгоритма
+
+                        sortAlgor.Label.Invoke((Action)delegate { sortAlgor.Label.Text += $" Sorting"; });
+
+                        // Асинхронно пишем ., .., ... пока сортируем массив
+                        while (!sortAlgor.IsSorted)
+                        {
+                            if (sortAlgor.Label.Text.Contains("..."))
+                            {
+                                sortAlgor.Label.Invoke((Action)delegate { sortAlgor.Label.Text = $"{temptext} Sorting"; });
+                            }
+                            else
+                            {
+                                sortAlgor.Label.Invoke((Action)delegate { sortAlgor.Label.Text += $"."; });
+                            }
+
+                            Thread.Sleep(600);
+                        }
+                        // После завершения сортировки выводим результат 
+                        var place = sortAlgorithmAndLabels.Where(x => x.IsSorted).Count();
+                        sortAlgor.Label.Invoke((Action)delegate { sortAlgor.Label.Text = $"#{place}. {temptext} Time: {sortAlgor.Time} Swap count: {sortAlgor.SwapCount}\nArray: {sortAlgor}"; });
+                    }); 
+                   
+                    // Сортируем асинхронно 
+                    sortAlgor.Sort();
+                   
+                });
+
+            }
         }
 
 
@@ -147,6 +121,7 @@ namespace SortAlgorithms
             var result = new int[count];
             for (int i = 0; i < count; i++)
             {
+                var rnd = new Random(i);
                 result[i] = rnd.Next(0, 101);
             }
             return result;
@@ -156,5 +131,6 @@ namespace SortAlgorithms
         {
 
         }
+
     }
 }

@@ -23,21 +23,46 @@ namespace SortAlgorithm
 
             for (int i = 0; i < array.Length; i++)
             {
-                Add(array [i]);
+                Add(array[i]);
             }
         }
 
-        private int GetLeftChildIndex(int elementIndex) => 2 * elementIndex + 1;
-        private int GetRightChildIndex(int elementIndex) => 2 * elementIndex + 2;
-        private int GetParentIndex(int elementIndex) => (elementIndex - 1) / 2;
-
-        private bool HasLeftChild(int elementIndex) => GetLeftChildIndex(elementIndex) < _size;
-        private bool HasRightChild(int elementIndex) => GetRightChildIndex(elementIndex) < _size;
-        private bool IsRoot(int elementIndex) => elementIndex == 0;
-
-        private int GetLeftChild(int elementIndex) => _elements[GetLeftChildIndex(elementIndex)];
-        private int GetRightChild(int elementIndex) => _elements[GetRightChildIndex(elementIndex)];
-        private int GetParent(int elementIndex) => _elements[GetParentIndex(elementIndex)];
+        private int GetLeftChildIndex(int elementIndex)
+        {
+            return 2 * elementIndex + 1;
+        }
+        private int GetRightChildIndex(int elementIndex)
+        {
+            return 2 * elementIndex + 2;
+        }
+        private int GetParentIndex(int elementIndex)
+        {
+            return (elementIndex - 1) / 2;
+        }
+        private bool HasLeftChild(int elementIndex)
+        {
+            return GetLeftChildIndex(elementIndex) < _size;
+        }
+        private bool HasRightChild(int elementIndex)
+        {
+            return GetRightChildIndex(elementIndex) < _size;
+        }
+        private bool IsRoot(int elementIndex)
+        {
+            return elementIndex == 0;
+        }
+        private int GetLeftChild(int elementIndex)
+        {
+            return _elements[GetLeftChildIndex(elementIndex)];
+        }
+        private int GetRightChild(int elementIndex)
+        {
+            return _elements[GetRightChildIndex(elementIndex)];
+        }
+        private int GetParent(int elementIndex)
+        {
+            return _elements[GetParentIndex(elementIndex)];
+        }
 
         private void Swap(int firstIndex, int secondIndex)
         {
@@ -49,8 +74,10 @@ namespace SortAlgorithm
 
         public int Pop()
         {
-            if (_size == 0)
+            if (_size == 0) 
+            {
                 throw new IndexOutOfRangeException();
+            }
 
             var result = _elements[0];
             _elements[0] = _elements[_size - 1];
@@ -64,8 +91,10 @@ namespace SortAlgorithm
         public void Add(int element)
         {
             if (_size == _elements.Length)
+            {
                 throw new IndexOutOfRangeException();
-
+            }
+     
             _elements[_size] = element;
             _size++;
 
@@ -102,8 +131,7 @@ namespace SortAlgorithm
                 Swap(parentIndex, index);
                 index = parentIndex;
             }
-        }
-    
+        }  
 
         public IEnumerator GetEnumerator()
         {

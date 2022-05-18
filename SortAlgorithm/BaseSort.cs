@@ -12,6 +12,8 @@ namespace SortAlgorithm
         public int SwapCount { get; protected set; } = 0;
 
         public bool IsSorted = false;
+
+
         protected void Swap (int index1, int index2)
         {
             (Items[index1], Items[index2]) = (Items[index2], Items[index1]);

@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace SortAlgorithms
 {
-    public class SortVisualization
+    public static class SortVisualization
     {
-        public List<Label> labels = new List<Label>();
+        public static List<Label> labels = new List<Label>();
 
-        public Label DrawLabel(string name)
+        public static Label DrawLabel(string name)
         {
             if (labels.Count > 0 && !string.IsNullOrWhiteSpace(name))
             {
@@ -42,9 +42,6 @@ namespace SortAlgorithms
             return label;
         }
         
-
-
-
 
 
         
