@@ -14,19 +14,14 @@ namespace SortAlgorithm
         /// Время выполнения:
         /// В лучшем случае – О(n)
         /// В худшем случае – О(n^2) 
-        
-
-        private Stopwatch timer = new Stopwatch();
-        public double Time => timer.Elapsed.TotalMilliseconds;
 
         public BubbleSort(int[] array)
         {
-            Items = array;
+            Items = array.ToArray();
         }
 
-        public void Sort()
+        protected override void MakeSort()
         {
-            timer.Restart();
             var count = Items.Length;
 
             for (int j = 0; j < count; j++) // Число проходов = длине массива
@@ -45,8 +40,6 @@ namespace SortAlgorithm
                     }
                 }
             }
-            IsSorted = true;
-            timer.Stop();
         }
 
 

@@ -47,9 +47,12 @@
     <Compile Include="DataStructure\Node.cs" />
     <Compile Include="DataStructure\Heap.cs" />
     <Compile Include="DataStructure\Tree.cs" />
+    <Compile Include="GnomeSort.cs" />
     <Compile Include="HeapSort.cs" />
     <Compile Include="InsertionSort.cs" />
+    <Compile Include="ISort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RadixSort.cs" />
     <Compile Include="SelectionSort.cs" />
     <Compile Include="ShellSort.cs" />
     <Compile Include="TreeSort.cs" />

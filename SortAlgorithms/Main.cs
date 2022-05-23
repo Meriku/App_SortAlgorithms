@@ -20,7 +20,7 @@ namespace SortAlgorithms
 
         private int ArrayLenght = 500;
 
-        private List<SortAlgorithmAndLabel> sortAlgorithmAndLabels = new List<SortAlgorithmAndLabel>();
+        private List<SortAlgorithmAndLabel<ISort>> sortAlgorithmAndLabels = new List<SortAlgorithmAndLabel<ISort>>();
 
         public Main()
         {
@@ -56,15 +56,15 @@ namespace SortAlgorithms
 
         private void buttonSortArray_Click(object sender, EventArgs e)
         {
-            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel(new BubbleSort(array.Items)));
-            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel(new CocktailSort(array.Items)));
-            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel(new SelectionSort(array.Items)));
-            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel(new TreeSort(array.Items)));
-            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel(new HeapSort(array.Items)));
-            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel(new InsertionSort(array.Items)));
-            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel(new ShellSort(array.Items)));
-
-            
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new BubbleSort(array.Items)));
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new CocktailSort(array.Items)));
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new SelectionSort(array.Items)));
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new GnomeSort(array.Items)));
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new TreeSort(array.Items)));
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new HeapSort(array.Items)));
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new InsertionSort(array.Items)));
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new ShellSort(array.Items)));
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new RadixSort(array.Items)));
 
             foreach (var sortAlgor in sortAlgorithmAndLabels)
             {
@@ -121,7 +121,7 @@ namespace SortAlgorithms
             var result = new int[count];
             for (int i = 0; i < count; i++)
             {
-                var rnd = new Random(i);
+                var rnd = new Random(i+DateTime.Now.Millisecond);
                 result[i] = rnd.Next(0, 101);
             }
             return result;

@@ -7,36 +7,37 @@ using System.Threading.Tasks;
 
 namespace SortAlgorithm
 {
-    public class InsertionSort : BaseSort
+    public class GnomeSort : BaseSort
     {
-        /// Сортировка Вставкой 
+
+        /// Гномья Сортировка 
 
         /// Время выполнения:
         /// В лучшем случае – О(n)
-        /// В среднем случае – О(nlog n)
         /// В худшем случае – О(n^2) 
-    
-        public InsertionSort(int[] array)
+
+
+        public GnomeSort(int[] array)
         {
             Items = array.ToArray();
         }
 
         protected override void MakeSort()
         {
-            for (int i = 1; i < Items.Length; i++)
+            var i = 1;
+            while (i < Items.Length)
             {
-                var temp = Items[i];
-                var j = i;
-                while (j > 0 && temp < Items[j - 1])
+                if (i == 0 || Items[i - 1] <= Items[i])
                 {
-                    Items[j] = Items[j - 1];
-                    SwapCount++;
-                    j--;
+                    i++;
                 }
-                Items[j] = temp;
+                else
+                {
+                    Swap(i, i - 1);
+                    i--;
+                }
             }
         }
-
 
 
 

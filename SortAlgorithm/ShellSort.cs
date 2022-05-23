@@ -15,21 +15,13 @@ namespace SortAlgorithm
         /// В лучшем случае – О(n)
         /// В среднем случае – О(nlog n)
         /// В худшем случае – О(n^2) 
-
-
-        private Stopwatch timer = new Stopwatch();
-        public double Time => timer.Elapsed.TotalMilliseconds;
-
-
         public ShellSort(int[] array)
         {
-            Items = array;
+            Items = array.ToArray();
         }
 
-
-        public void Sort()
+        protected override void MakeSort()
         {
-            timer.Restart();
             var step = Items.Length / 2; 
             // Шаг равен половине длины массива (округление в меньшую сторону)
 
@@ -50,8 +42,6 @@ namespace SortAlgorithm
                 step /= 2;
                 // Делим шаг на 2
             }
-            IsSorted = true;
-            timer.Stop();
         }
     }
 }

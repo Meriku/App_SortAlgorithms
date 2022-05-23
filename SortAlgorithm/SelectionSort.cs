@@ -14,23 +14,13 @@ namespace SortAlgorithm
         /// Время выполнения:
         /// Всегда – О(n^2) 
 
-
-        private Stopwatch timer = new Stopwatch();
-        public double Time => timer.Elapsed.TotalMilliseconds;
-
-
         public SelectionSort(int[] array)
         {
-            Items = array;
+            Items = array.ToArray();
         }
-
-
-        public void Sort()
+        protected override void MakeSort()
         {
-            timer.Restart();
-
             var minIndex = 0;
-
             for (int i = 0; i < Items.Length - 1; i++)
             {
                 minIndex = i;
@@ -50,9 +40,6 @@ namespace SortAlgorithm
                     SwapCount++;
                 }           
             }
-
-            IsSorted = true;
-            timer.Stop();
         }
 
 

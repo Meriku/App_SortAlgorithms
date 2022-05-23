@@ -15,18 +15,13 @@ namespace SortAlgorithm
         /// В лучшем случае – О(n)
         /// В худшем случае – О(n^2) 
 
-        private Stopwatch timer = new Stopwatch();
-        public double Time => timer.Elapsed.TotalMilliseconds;
-
         public CocktailSort(int[] array)
         {
-            Items = array;
+            Items = array.ToArray();
         }
 
-        public void Sort()
-        {
-            timer.Restart();
-            
+        protected override void MakeSort()
+        {           
             int left = 0;                   // Крайний левый неотсортированый элемент
             int right = Items.Length - 1;   // Крайний правый неотсортированый элемент
 
@@ -52,8 +47,6 @@ namespace SortAlgorithm
                 }
                 left++; // Отсортировали крайний левый элемент
             }
-            IsSorted = true;
-            timer.Stop();
         }
     }
 }

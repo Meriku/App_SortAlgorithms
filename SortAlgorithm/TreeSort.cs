@@ -11,32 +11,19 @@ namespace SortAlgorithm
     public class TreeSort : BaseSort
     {
 
-        private Stopwatch timer = new Stopwatch();
-        public double Time => timer.Elapsed.TotalMilliseconds;
-
-
         private Tree tree;
         private int[] Array;
 
         public TreeSort(int[] array)
         {
-            Array = array;
+            Array = array.ToArray();
         }
 
-        public void Sort()
+        protected override void MakeSort()
         {
-            timer.Restart();
-
             tree = new Tree(Array);
             Items = tree.Inorder();
-
-            IsSorted = true;
-            timer.Stop();
-
         }
-
-
-
 
 
     }

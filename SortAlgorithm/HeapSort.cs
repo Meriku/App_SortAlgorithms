@@ -9,22 +9,17 @@ namespace SortAlgorithm
 {
     public class HeapSort : BaseSort
     {
-        private Stopwatch timer = new Stopwatch();
-        public double Time => timer.Elapsed.TotalMilliseconds;
-
 
         private Heap heap;
         private int[] Array;
 
         public HeapSort(int[] array)
         {
-            Array = array;
+            Array = array.ToArray();
         }
 
-        public void Sort()
+        protected override void MakeSort()
         {
-            timer.Restart();
-
             heap = new Heap(Array);
 
             var result = new List<int>();
@@ -35,13 +30,7 @@ namespace SortAlgorithm
 
             Items = result.ToArray();
             SwapCount = heap.SwapCounts;
-            IsSorted = true;
-            timer.Stop();
-
         }
-
-
-
 
 
     }
