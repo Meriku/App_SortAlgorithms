@@ -26,9 +26,8 @@ namespace SortAlgorithms
             }
             else
             {
-                var sortType = typeof(T);
+                var sortType = sortalgorithm.GetType();
                 Label = SortVisualization.DrawLabel(sortType.Name);
-                // TODO: Name of Algorithm
                 sortAlgorithm = sortalgorithm;
             }
         }
