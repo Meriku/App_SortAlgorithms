@@ -9,7 +9,7 @@ namespace SortAlgorithm
     public class RadixSort : BaseSort
     {
 
-        /// Поразрядная сортировка
+        /// Поразрядная сортировка Radix sort LSD
 
         /// Время выполнения:
         /// Всегда – О(n * k/d)
@@ -22,7 +22,6 @@ namespace SortAlgorithm
         protected override void MakeSort()
         {
             var itemsList = Items.ToList();
-
             var groups = new List<List<int>>();
             // Группировка чисел по цифрам в разрядах
 
@@ -32,7 +31,6 @@ namespace SortAlgorithm
             }
 
             int length = GetMaxLength();
-
             for (int step = 0; step < length; step++)
             // Количество проходов = наибольшему количеству разрядов (если наибольшее число 999 - три прохода соответственно)
             {
@@ -47,7 +45,6 @@ namespace SortAlgorithm
                 }
 
                 itemsList.Clear();
-
                 // Сборка элементов
                 foreach (var group in groups)
                 {
@@ -56,18 +53,13 @@ namespace SortAlgorithm
                         itemsList.Add(item);
                     }
                 }
-
                 // Очистка корзины
                 foreach (var group in groups)
                 {
                     group.Clear();
                 }
-
-
             }
-
             Items = itemsList.ToArray();
-
         }
 
         private int GetMaxLength()
@@ -76,9 +68,15 @@ namespace SortAlgorithm
 
             foreach (int item in Items)
             {
-                //var l = Convert.ToInt32(Math.Floor(Math.Log10(item) + 1)); // Не работает со значением item = 0. Дает -inf.
-
-                var l = item.ToString().Length;
+                var l = 0;
+                if (item == 0)
+                {
+                    l = 1;
+                }
+                else
+                {
+                    l = Convert.ToInt32(Math.Floor(Math.Log10(item) + 1));
+                }
 
                 if (l > length)
                 {

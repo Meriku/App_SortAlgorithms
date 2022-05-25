@@ -65,6 +65,8 @@ namespace SortAlgorithms
             sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new InsertionSort(array.Items)));
             sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new ShellSort(array.Items)));
             sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new RadixSort(array.Items)));
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new MergeSort(array.Items)));
+
 
             foreach (var sortAlgor in sortAlgorithmAndLabels)
             {

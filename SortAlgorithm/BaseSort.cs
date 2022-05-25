@@ -13,10 +13,9 @@ namespace SortAlgorithm
         public int SwapCount { get; protected set; } = 0;
 
         private Stopwatch timer = new Stopwatch();
-        public double Time => timer.Elapsed.TotalMilliseconds;
 
         int ISort.SwapCount { get => SwapCount; }
-        double ISort.Time { get => Time; }
+        double ISort.Time { get => timer.Elapsed.TotalMilliseconds; }
 
         protected void Swap (int index1, int index2)
         {
