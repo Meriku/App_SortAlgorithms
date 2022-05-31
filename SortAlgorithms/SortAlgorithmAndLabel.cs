@@ -11,6 +11,8 @@ namespace SortAlgorithms
     internal class SortAlgorithmAndLabel<T> where T : ISort
     {
         public Label Label { get; private set; }
+        public CheckBox CheckBox { get; private set; }
+
         public double Time;
         public int SwapCount;
         public bool IsSorted = false;
@@ -28,6 +30,7 @@ namespace SortAlgorithms
             {
                 var sortType = sortalgorithm.GetType();
                 Label = SortVisualization.DrawLabel(sortType.Name);
+                CheckBox = SortVisualization.AddCheckBox(sortalgorithm.Items.Length <= sortalgorithm.MaxItems);
                 sortAlgorithm = sortalgorithm;
             }
         }

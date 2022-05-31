@@ -17,6 +17,7 @@ namespace SortAlgorithm
 
         public MergeSort(int[] array)
         {
+            MaxItems = 100000;
             Items = array.ToArray();
         }
 

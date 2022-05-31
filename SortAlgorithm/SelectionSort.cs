@@ -16,6 +16,7 @@ namespace SortAlgorithm
 
         public SelectionSort(int[] array)
         {
+            MaxItems = 20000;
             Items = array.ToArray();
         }
         protected override void MakeSort()

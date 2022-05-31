@@ -17,6 +17,7 @@ namespace SortAlgorithm
 
         public CocktailSort(int[] array)
         {
+            MaxItems = 20000;
             Items = array.ToArray();
         }
 

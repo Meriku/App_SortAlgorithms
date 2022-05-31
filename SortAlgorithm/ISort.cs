@@ -11,8 +11,8 @@ namespace SortAlgorithm
         void Sort();
 
         int SwapCount { get; }
-
         double Time { get; }
-
+        int MaxItems { get; }
+        int[] Items { get; }
     }
 }

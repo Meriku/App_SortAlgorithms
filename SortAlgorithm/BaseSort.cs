@@ -9,13 +9,17 @@ namespace SortAlgorithm
 {
     public class BaseSort : ISort
     {
-        public int[] Items;
+        public int[] Items { get; protected set; }
         public int SwapCount { get; protected set; } = 0;
 
         private Stopwatch timer = new Stopwatch();
 
+        protected int MaxItems { set; get; }
+
         int ISort.SwapCount { get => SwapCount; }
         double ISort.Time { get => timer.Elapsed.TotalMilliseconds; }
+        int ISort.MaxItems { get => MaxItems; }
+        int[] ISort.Items { get => Items; }
 
         protected void Swap (int index1, int index2)
         {
@@ -65,6 +69,16 @@ namespace SortAlgorithm
             return result.ToString();
         }
 
+        public void SetNewArray(int count)
+        {
+            var result = new int[count];
+            for (int i = 0; i < count; i++)
+            {
+                var rnd = new Random(i + DateTime.Now.Millisecond);
+                result[i] = rnd.Next(0, 101);
+            }
+            Items = result;
+        }
 
     }
 }

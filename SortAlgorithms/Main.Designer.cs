@@ -37,7 +37,7 @@
             // 
             // buttonGenerateArray
             // 
-            this.buttonGenerateArray.Location = new System.Drawing.Point(12, 498);
+            this.buttonGenerateArray.Location = new System.Drawing.Point(12, 698);
             this.buttonGenerateArray.Name = "buttonGenerateArray";
             this.buttonGenerateArray.Size = new System.Drawing.Size(180, 43);
             this.buttonGenerateArray.TabIndex = 0;
@@ -47,7 +47,7 @@
             // 
             // buttonSortArray
             // 
-            this.buttonSortArray.Location = new System.Drawing.Point(610, 498);
+            this.buttonSortArray.Location = new System.Drawing.Point(440, 698);
             this.buttonSortArray.Name = "buttonSortArray";
             this.buttonSortArray.Size = new System.Drawing.Size(180, 43);
             this.buttonSortArray.TabIndex = 1;
@@ -57,11 +57,11 @@
             // 
             // trackBarArrayLenght
             // 
-            this.trackBarArrayLenght.Location = new System.Drawing.Point(233, 498);
+            this.trackBarArrayLenght.Location = new System.Drawing.Point(208, 698);
             this.trackBarArrayLenght.Maximum = 100000;
             this.trackBarArrayLenght.Minimum = 10;
             this.trackBarArrayLenght.Name = "trackBarArrayLenght";
-            this.trackBarArrayLenght.Size = new System.Drawing.Size(333, 56);
+            this.trackBarArrayLenght.Size = new System.Drawing.Size(217, 56);
             this.trackBarArrayLenght.TabIndex = 2;
             this.trackBarArrayLenght.Value = 10000;
             this.trackBarArrayLenght.ValueChanged += new System.EventHandler(this.trackBarArrayLenght_ValueChanged);
@@ -69,23 +69,24 @@
             // labelArrayLenght
             // 
             this.labelArrayLenght.AutoSize = true;
-            this.labelArrayLenght.Location = new System.Drawing.Point(328, 469);
+            this.labelArrayLenght.Location = new System.Drawing.Point(238, 679);
             this.labelArrayLenght.Name = "labelArrayLenght";
             this.labelArrayLenght.Size = new System.Drawing.Size(147, 16);
             this.labelArrayLenght.TabIndex = 3;
             this.labelArrayLenght.Text = "Длина массива: 10000";
+            this.labelArrayLenght.Click += new System.EventHandler(this.labelArrayLenght_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(802, 553);
+            this.ClientSize = new System.Drawing.Size(632, 753);
             this.Controls.Add(this.labelArrayLenght);
             this.Controls.Add(this.trackBarArrayLenght);
             this.Controls.Add(this.buttonSortArray);
             this.Controls.Add(this.buttonGenerateArray);
-            this.MaximumSize = new System.Drawing.Size(820, 600);
-            this.MinimumSize = new System.Drawing.Size(820, 600);
+            this.MaximumSize = new System.Drawing.Size(650, 800);
+            this.MinimumSize = new System.Drawing.Size(650, 800);
             this.Name = "Main";
             this.Text = "Sort Algorithms";
             this.Load += new System.EventHandler(this.Main_Load);

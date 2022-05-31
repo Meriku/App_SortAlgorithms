@@ -10,12 +10,13 @@ namespace SortAlgorithm
 {
     public class TreeSort : BaseSort
     {
-
         private Tree tree;
         private int[] Array;
 
         public TreeSort(int[] array)
         {
+            Items = array;
+            MaxItems = 50000;
             Array = array.ToArray();
         }
 

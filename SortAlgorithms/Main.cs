@@ -16,7 +16,6 @@ namespace SortAlgorithms
     public partial class Main : Form
     {
         BaseSort array = new BaseSort();
-        Label arrayLabel = new Label();
 
         private int ArrayLenght = 500;
 
@@ -29,51 +28,47 @@ namespace SortAlgorithms
 
         private void buttonGenerateArray_Click(object sender, EventArgs e)
         {
-   
-            if (SortVisualization.labels.Count() == 0)
+            array.SetNewArray(ArrayLenght);
+            if (SortVisualization.Array is null)
             {
-                array.Items = GetArray(ArrayLenght);
-                arrayLabel = SortVisualization.DrawLabel($"Случайный массив: {array}");
-                Controls.Add(arrayLabel);
+                SortVisualization.DrawArray($"Array: {array}");
+                Controls.Add(SortVisualization.Array);
             }
-            else
+            else 
             {
-                array.Items = GetArray(ArrayLenght);
-                arrayLabel.Invoke((Action)delegate { arrayLabel.Text = $"Случайный массив: {array}"; });
-
-                foreach (var sortAlgor in sortAlgorithmAndLabels)
-                {
-                    Controls.Remove(sortAlgor.Label);
-                    if (SortVisualization.labels.Contains(sortAlgor.Label))
-                    {
-                        SortVisualization.labels.Remove(sortAlgor.Label);
-                    }        
-                }
-
-                sortAlgorithmAndLabels.Clear();
+                SortVisualization.DrawArray($"Array: {array}");
             }
-        }
-
-        private void buttonSortArray_Click(object sender, EventArgs e)
-        {
+                 
+            foreach (var sortAlgor in sortAlgorithmAndLabels)
+            {
+                Controls.Remove(sortAlgor.Label);
+                Controls.Remove(sortAlgor.CheckBox);
+                SortVisualization.Clear();   
+            }
+            sortAlgorithmAndLabels.Clear();
+                   
             sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new BubbleSort(array.Items)));
             sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new CocktailSort(array.Items)));
             sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new SelectionSort(array.Items)));
             sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new GnomeSort(array.Items)));
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new InsertionSort(array.Items)));        
             sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new TreeSort(array.Items)));
-            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new HeapSort(array.Items)));
-            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new InsertionSort(array.Items)));
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new HeapSort(array.Items)));                   
             sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new ShellSort(array.Items)));
             sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new RadixSort(array.Items)));
             sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new MergeSort(array.Items)));
-
-
+            sortAlgorithmAndLabels.Add(new SortAlgorithmAndLabel<ISort>(new QuickSort(array.Items)));
+            
             foreach (var sortAlgor in sortAlgorithmAndLabels)
             {
                 Controls.Add(sortAlgor.Label);
+                Controls.Add(sortAlgor.CheckBox);
             }
+        }
 
-            foreach (var sortAlgor in sortAlgorithmAndLabels)
+        private void buttonSortArray_Click(object sender, EventArgs e)
+        {     
+            foreach (var sortAlgor in sortAlgorithmAndLabels.Where(x => x.CheckBox.Checked).Where(x => !x.IsSorted))
             {
                 Task.Run(() =>
                 {
@@ -95,10 +90,11 @@ namespace SortAlgorithms
                                 sortAlgor.Label.Invoke((Action)delegate { sortAlgor.Label.Text += $"."; });
                             }
 
-                            Thread.Sleep(600);
+                            Thread.Sleep(500);
                         }
                         // После завершения сортировки выводим результат 
-                        var place = sortAlgorithmAndLabels.Where(x => x.IsSorted).Count();
+                        //var place = sortAlgorithmAndLabels.Where(x => x.IsSorted).Count();
+                        var place = sortAlgorithmAndLabels.Where(x => x.IsSorted).Where(x => x.Time < sortAlgor.Time).Count() + 1;
                         sortAlgor.Label.Invoke((Action)delegate { sortAlgor.Label.Text = $"#{place}. {temptext} Time: {sortAlgor.Time} Swap count: {sortAlgor.SwapCount}\nArray: {sortAlgor}"; });
                     }); 
                    
@@ -110,23 +106,10 @@ namespace SortAlgorithms
             }
         }
 
-
-
         private void trackBarArrayLenght_ValueChanged(object sender, EventArgs e)
         {
             labelArrayLenght.Text = "Длина массива: " + trackBarArrayLenght.Value.ToString();
             ArrayLenght = trackBarArrayLenght.Value;
-        }
-
-        private int[] GetArray(int count)
-        {
-            var result = new int[count];
-            for (int i = 0; i < count; i++)
-            {
-                var rnd = new Random(i+DateTime.Now.Millisecond);
-                result[i] = rnd.Next(0, 101);
-            }
-            return result;
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -134,5 +117,9 @@ namespace SortAlgorithms
 
         }
 
+        private void labelArrayLenght_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

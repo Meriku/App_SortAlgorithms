@@ -16,6 +16,7 @@ namespace SortAlgorithm
 
         public RadixSort(int[] array)
         {
+            MaxItems = 100000;
             Items = array.ToArray();
         }
 

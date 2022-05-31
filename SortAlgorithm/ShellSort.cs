@@ -17,6 +17,7 @@ namespace SortAlgorithm
         /// В худшем случае – О(n^2) 
         public ShellSort(int[] array)
         {
+            MaxItems = 100000;
             Items = array.ToArray();
         }
 

@@ -15,6 +15,8 @@ namespace SortAlgorithm
 
         public HeapSort(int[] array)
         {
+            Items = array;
+            MaxItems = 50000;
             Array = array.ToArray();
         }
 

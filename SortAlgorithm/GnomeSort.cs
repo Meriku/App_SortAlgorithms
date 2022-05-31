@@ -19,6 +19,7 @@ namespace SortAlgorithm
 
         public GnomeSort(int[] array)
         {
+            MaxItems = 20000;
             Items = array.ToArray();
         }
 
